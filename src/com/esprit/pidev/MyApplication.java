@@ -9,7 +9,7 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.io.Log;
 import com.codename1.ui.Toolbar;
-import com.esprit.pidev.forms.HomeForm;
+import com.esprit.pidev.forms.PublicationsForm;
 import com.esprit.pidev.forms.SplashForm;
 import java.io.IOException;
 

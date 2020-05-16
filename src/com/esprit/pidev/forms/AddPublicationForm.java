@@ -28,7 +28,7 @@ public class AddPublicationForm extends Form {
         Location position;
         if (LocationManager.getLocationManager().isGPSEnabled()) {
             position = LocationManager.getLocationManager().getCurrentLocationSync();
-            System.out.println(position);
+            Dialog.show("Position", "Latitude= " + position.getLatitude() + " Longtitude= " + position.getLongitude(), "OK",null);
         } else {
             Dialog.show("NOT FOUND", "Votre localisation est introuvable, veuillez verifier que votre GPS est activé", "OK", null);
         }

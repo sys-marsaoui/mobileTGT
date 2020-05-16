@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
-    <image name="bla.jpg"  />
-    <image name="bridge.jpg"  />
-    <image name="calendar-background.jpg"  />
-    <image name="calendar-separator.png" type="multi"  />
+    <image name="bg-9.jpg"  />
     <image name="card.png" type="multi"  />
     <image name="contact-a.png" type="multi"  />
     <image name="contact-b.png" type="multi"  />
     <image name="contact-c.png" type="multi"  />
-    <image name="dark-rect.png" type="multi"  />
-    <image name="griffith.jpg"  />
     <image name="GroupElement.borderBottom_1.png" type="multi"  />
     <image name="GroupElement.borderBottomL_1.png" type="multi"  />
     <image name="GroupElement.borderBottomR_1.png" type="multi"  />
@@ -56,21 +51,17 @@
             <entry key="Calendar.Thursday" value="Thu" />
             <entry key="ok" value="OK" />
             <entry key="Calendar.Saturday" value="Sat" />
-            <entry key="Calendar.Friday" value="Fri" />
             <entry key="select" value="Select" />
+            <entry key="Calendar.Friday" value="Fri" />
             <entry key="edit" value="Edit" />
             <entry key="Calendar.Monday" value="Mon" />
             <entry key="cancel" value="Cancel" />
         </lang>
     </l10n>
-    <image name="label_round-selected.png" type="multi"  />
-    <image name="label_round.png" type="multi"  />
-    <image name="learn-codename-one.jpg"  />
+    <image name="logout.png"  />
     <image name="profile_image.png" type="multi"  />
     <image name="progress.png" type="multi"  />
     <image name="selection-in-sidemenu.png" type="multi"  />
-    <image name="sidemenu-background.jpg"  />
-    <image name="skate-park.jpg"  />
     <image name="Splash"  />
     <image name="TGT.png"  />
     <theme name="Theme">
@@ -105,9 +96,9 @@
         <val key="Button.sel#margin" value="1.0,1.0,1.0,1.0" />
         <val key="Button.sel#padUnit" value="2,2,2,2" />
         <val key="Button.sel#padding" value="4.0,4.0,4.0,4.0" />
-        <val key="Calendar.bgImage" value="calendar-background.jpg" />
-        <val key="Calendar.bgType" value="33" />
-        <val key="Calendar.margin" value="0,0,0,0" />
+        <gradient key="Calendar.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="Calendar.bgType" value="0" />
+        <val key="Calendar.margin" value="0.0,0.0,0.0,0.0" />
         <val key="CalendarDateTitle.align" value="4" />
         <val key="CalendarDateTitle.fgColor" value="ffffff" />
         <font key="CalendarDateTitle.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="4.5" />
@@ -203,6 +194,7 @@
         <val key="CenterWhite.sel#margin" value="1,1,1,1" />
         <val key="CenterWhite.sel#padUnit" value="2,2,2,2" />
         <val key="CenterWhite.sel#padding" value="1,1,3,3" />
+        <val key="CheckBox.press#bgColor" value="cc1573" />
         <val key="DarkRect.bgColor" value="262f38" />
         <border key="DarkRect.border" type="round" roundBorderColor="2502456" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="DarkRect.fgColor" value="262f38" />
@@ -428,25 +420,16 @@
         <val key="SideCommandNoPad.sel#transparency" value="0" />
         <val key="SideCommandNoPad.textDecoration" value="0" />
         <val key="SideCommandNoPad.transparency" value="0" />
-        <val key="SideCommandNumber.align" value="4" />
-        <border key="SideCommandNumber.border" type="round" roundBorderColor="15170670" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
-        <val key="SideCommandNumber.fgColor" value="ffffff" />
-        <font key="SideCommandNumber.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="1.5" />
-        <val key="SideCommandNumber.marUnit" value="0,2,0,2" />
-        <val key="SideCommandNumber.margin" value="0,0,2,2" />
-        <val key="SideCommandNumber.padUnit" value="0,2,0,2" />
-        <val key="SideCommandNumber.padding" value="1,1,3,3" />
-        <val key="SideCommandNumber.transparency" value="0" />
         <border key="SideCommandSmall.border" type="empty" />
         <val key="SideCommandSmall.fgColor" value="bdcadb" />
         <font key="SideCommandSmall.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
         <val key="SideCommandSmall.padUnit" value="0,0,2,0" />
         <val key="SideCommandSmall.padding" value="0,4,0,0" />
         <val key="SideCommandSmall.textDecoration" value="0" />
-        <val key="SideNavigationPanel.bgImage" value="sidemenu-background.jpg" />
+        <val key="SideNavigationPanel.bgImage" value="bg-9.jpg" />
         <val key="SideNavigationPanel.bgType" value="33" />
         <val key="SideNavigationPanel.padUnit" value="2,2,0,0" />
-        <val key="SideNavigationPanel.padding" value="16,0,5,0" />
+        <val key="SideNavigationPanel.padding" value="16.0,0.0,5.0,0.0" />
         <val key="SignInForm.bgColor" value="ffffff" />
         <val key="SignInForm.padUnit" value="2,2,2,2" />
         <val key="SignInForm.padding" value="2,2,3,3" />
@@ -584,35 +567,7 @@
         <gradient key="Toolbar.bgGradient" color1="13374835" color2="5710505" posX="0.5" posY="0.5" radius="1.0" />
         <val key="Toolbar.bgType" value="7" />
         <border key="Toolbar.border" type="empty" />
-        <val key="Welcome.bgImage" value="welcome-background.jpg" />
-        <val key="Welcome.bgType" value="33" />
-        <val key="Welcome.margin" value="0,0,0,0" />
-        <val key="Welcome.padUnit" value="2,2,2,2" />
-        <val key="Welcome.padding" value="1,1,1,1" />
-        <val key="Welcome.transparency" value="255" />
-        <val key="WelcomeBody.align" value="4" />
-        <val key="WelcomeBody.fgColor" value="707e89" />
-        <font key="WelcomeBody.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
-        <val key="WelcomeBody.marUnit" value="0,2,0,2" />
-        <val key="WelcomeBody.margin" value="0,0,2,2" />
-        <val key="WelcomeBody.padUnit" value="0,2,2,2" />
-        <val key="WelcomeBody.padding" value="0,4,3,3" />
-        <val key="WelcomeBody.transparency" value="0" />
-        <val key="WelcomeContent.margin" value="0,0,0,0" />
-        <val key="WelcomeContent.padUnit" value="2,2,2,2" />
-        <val key="WelcomeContent.padding" value="2,3,0,0" />
-        <val key="WelcomeContent.transparency" value="0" />
-        <val key="WelcomeTitle.align" value="4" />
-        <val key="WelcomeTitle.fgColor" value="707e89" />
-        <font key="WelcomeTitle.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.5" />
-        <val key="WelcomeTitle.margin" value="0,0,0,0" />
-        <val key="WelcomeTitle.padUnit" value="2,2,2,2" />
-        <val key="WelcomeTitle.padding" value="1,1,1,1" />
-        <val key="WelcomeTitle.transparency" value="0" />
         <val key="transparency" value="0" />
     </theme>
     <image name="toolbar-profile-pic.png" type="multi"  />
-    <image name="walthru-radio-selected.png" type="multi"  />
-    <image name="walthru-radio-unselected.png" type="multi"  />
-    <image name="welcome-background.jpg"  />
 </resource>
