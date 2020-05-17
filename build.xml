@@ -563,7 +563,6 @@
     </target>
 
     <target name="refresh-libs-impl">
-        <delete dir="lib/impl" />
         <installLibs lib="lib" dest="lib/impl" />        
     </target>
 

@@ -12,4 +12,5 @@ package com.esprit.pidev.utils;
 public class Statics {
 
     public static final String BASE_URL = "http://localhost/TGTMobileWeb/web/app_dev.php/";
+    public static final String BASE_URL1 = "https://eu1.locationiq.com/v1/reverse.php?key=6a09ecb63359a3";
 }

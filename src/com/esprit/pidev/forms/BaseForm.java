@@ -100,5 +100,5 @@ public class BaseForm extends Form {
     
     protected boolean isCurrentArticles() {
         return false;
-    }
+    }   
 }

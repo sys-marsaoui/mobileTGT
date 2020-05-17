@@ -13,6 +13,7 @@ import com.codename1.io.NetworkManager;
 import com.codename1.l10n.ParseException;
 import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.events.ActionListener;
+import com.esprit.pidev.models.Addresse;
 import com.esprit.pidev.models.CatégoriePublication;
 import com.esprit.pidev.models.Publication;
 import com.esprit.pidev.utils.DataSource;
@@ -33,6 +34,8 @@ public class PublicationService {
 
     private boolean responseResult;
     public ArrayList<Publication> publications;
+    public ArrayList<CatégoriePublication> catégories;
+    public String addresse;
 
     public PublicationService() {
         request = DataSource.getInstance().getRequest();
@@ -91,7 +94,7 @@ public class PublicationService {
     }
 
     public ArrayList<Publication> getAllPublications() {
-        String url = Statics.BASE_URL + "/publications";
+        String url = Statics.BASE_URL + "publications";
         request.setUrl(url);
         request.setPost(false);
         request.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -110,9 +113,25 @@ public class PublicationService {
         return publications;
     }
     
-    /*public Publication getPublication(){
-        
-    }*/
+    public ArrayList<CatégoriePublication> getAllCatégories(){
+         String url = Statics.BASE_URL + "categorie";
+         request.setUrl(url);
+        request.setPost(false);
+        request.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                try {
+                    catégories = parseCatégories(new String(request.getResponseData()));
+                    request.removeResponseListener(this);
+                } catch (ParseException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+
+        return catégories;
+    }
     
     public ArrayList<Publication> parsePublications(String jsonText) throws ParseException {
         try {
@@ -143,5 +162,56 @@ public class PublicationService {
 
         return publications;
     }
+    
+    public ArrayList<CatégoriePublication> parseCatégories(String jsonText) throws ParseException{
+        try {
+            catégories = new ArrayList<>();
 
+            JSONParser jp = new JSONParser();
+            Map<String, Object> catégoriesListJson = jp.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+
+            List<Map<String, Object>> list = (List<Map<String, Object>>) catégoriesListJson.get("root");
+            for (Map<String, Object> obj : list) {
+                int idCat = (int)Float.parseFloat(obj.get("id").toString());
+                String nomCat = obj.get("nomCat").toString();
+                catégories.add(new CatégoriePublication(idCat, nomCat));
+            }
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return catégories;
+    }
+    
+    public String getAddresse(String lat,String longitude){
+        String url = Statics.BASE_URL1 + "&lat=" + lat + "&lon=" + longitude + "&format=json";
+        request.setUrl(url);
+        request.setContentType("application/json");
+        request.addRequestHeader("Accept", "application/json");
+        request.setPost(false);
+        request.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                try {
+                    addresse = parseAddresse(new String(request.getResponseData()));
+                    request.removeResponseListener(this);
+                } catch (ParseException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        return addresse;
+    }
+    
+    public String parseAddresse(String jsonText) throws ParseException{
+       JSONParser jp = new JSONParser();
+        try {
+            Map<String, Object> addressesMap = jp.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            addresse = addressesMap.get("display_name").toString();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return addresse ;
+    }
 }

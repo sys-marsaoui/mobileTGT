@@ -2,10 +2,10 @@
 
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
     <image name="bg-9.jpg"  />
-    <image name="card.png" type="multi"  />
     <image name="contact-a.png" type="multi"  />
     <image name="contact-b.png" type="multi"  />
     <image name="contact-c.png" type="multi"  />
+    <image name="controls.png"  />
     <image name="GroupElement.borderBottom_1.png" type="multi"  />
     <image name="GroupElement.borderBottomL_1.png" type="multi"  />
     <image name="GroupElement.borderBottomR_1.png" type="multi"  />
@@ -51,14 +51,16 @@
             <entry key="Calendar.Thursday" value="Thu" />
             <entry key="ok" value="OK" />
             <entry key="Calendar.Saturday" value="Sat" />
-            <entry key="select" value="Select" />
             <entry key="Calendar.Friday" value="Fri" />
+            <entry key="select" value="Select" />
             <entry key="edit" value="Edit" />
             <entry key="Calendar.Monday" value="Mon" />
             <entry key="cancel" value="Cancel" />
         </lang>
     </l10n>
+    <image name="left-arrow.png"  />
     <image name="logout.png"  />
+    <image name="photo.png"  />
     <image name="profile_image.png" type="multi"  />
     <image name="progress.png" type="multi"  />
     <image name="selection-in-sidemenu.png" type="multi"  />
@@ -84,7 +86,7 @@
         <val key="Button.press#fgColor" value="ffffff" />
         <font key="Button.press#font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />
         <val key="Button.press#marUnit" value="2,2,2,2" />
-        <val key="Button.press#margin" value="1.0,1.0,1.0,1.0" />
+        <val key="Button.press#margin" value="0.0,0.0,0.0,0.0" />
         <val key="Button.press#padUnit" value="2,2,2,2" />
         <val key="Button.press#padding" value="4.0,4.0,4.0,4.0" />
         <gradient key="Button.sel#bgGradient" color1="5710505" color2="5710505" posX="0.5" posY="0.5" radius="1.0" />
@@ -195,6 +197,14 @@
         <val key="CenterWhite.sel#padUnit" value="2,2,2,2" />
         <val key="CenterWhite.sel#padding" value="1,1,3,3" />
         <val key="CheckBox.press#bgColor" value="cc1573" />
+        <val key="ComboBox.bgColor" value="bbbbbb" />
+        <border key="ComboBox.border" type="underline"  millimeters="false" thickness="5.0" color="13374835" />
+        <val key="ComboBox.fgColor" value="bbbbbb" />
+        <val key="ComboBox.sel#bgColor" value="bbbbbb" />
+        <border key="ComboBox.sel#border" type="underline"  millimeters="false" thickness="5.0" color="13374835" />
+        <val key="ComboBox.sel#fgColor" value="bbbbbb" />
+        <val key="ComboBoxList.bgColor" value="bbbbbb" />
+        <val key="ComboBoxList.fgColor" value="000000" />
         <val key="DarkRect.bgColor" value="262f38" />
         <border key="DarkRect.border" type="round" roundBorderColor="2502456" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="DarkRect.fgColor" value="262f38" />
@@ -532,13 +542,13 @@
         <val key="StausBar.transparency" value="0" />
         <gradient key="TextArea.bgGradient" color1="12303291" color2="12303291" posX="0.5" posY="0.5" radius="1.0" />
         <val key="TextArea.bgType" value="7" />
-        <border key="TextArea.border" type="underline"  millimeters="false" thickness="1.0" color="0" />
-        <border key="TextArea.sel#border" type="underline"  millimeters="false" thickness="1.0" color="13374835" />
+        <border key="TextArea.border" type="underline"  millimeters="false" thickness="5.0" color="0" />
+        <border key="TextArea.sel#border" type="underline"  millimeters="false" thickness="5.0" color="13374835" />
         <gradient key="TextField.bgGradient" color1="12303291" color2="12303291" posX="0.5" posY="0.5" radius="1.0" />
         <val key="TextField.bgType" value="7" />
-        <border key="TextField.border" type="underline"  millimeters="false" thickness="1.0" color="0" />
+        <border key="TextField.border" type="underline"  millimeters="false" thickness="5.0" color="0" />
         <border key="TextField.press#border" type="underline"  millimeters="false" thickness="1.0" color="0" />
-        <border key="TextField.sel#border" type="underline"  millimeters="false" thickness="1.0" color="13374835" />
+        <border key="TextField.sel#border" type="underline"  millimeters="false" thickness="5.0" color="13374835" />
         <val key="TinyBoldLabel.fgColor" value="3c4f5e" />
         <font key="TinyBoldLabel.font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="1.5" />
         <val key="TinyBoldLabel.margin" value="0,0,0,0" />
@@ -569,5 +579,4 @@
         <border key="Toolbar.border" type="empty" />
         <val key="transparency" value="0" />
     </theme>
-    <image name="toolbar-profile-pic.png" type="multi"  />
 </resource>
