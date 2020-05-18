@@ -12,6 +12,7 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.l10n.ParseException;
 import com.codename1.l10n.SimpleDateFormat;
+import com.codename1.processing.Result;
 import com.codename1.ui.events.ActionListener;
 import com.esprit.pidev.models.Addresse;
 import com.esprit.pidev.models.CatégoriePublication;
@@ -77,8 +78,8 @@ public class PublicationService {
         return responseResult;
     }
 
-    public boolean supprimer(Publication p) {
-        String url = Statics.BASE_URL + "publications/" + p.getId_pub() + "/delete";
+    public boolean supprimer(int id_pub) {
+        String url = Statics.BASE_URL + "publications/" + id_pub + "/delete";
 
         request.setUrl(url);
         request.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -150,8 +151,9 @@ public class PublicationService {
                 float ratingPub = Float.parseFloat(obj.get("ratingPub").toString());
                 SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+00:00"); 
                 Date dateTimePub=dateFormat.parse(datePub);
-                int idCat = (int) Float.parseFloat(obj.get("categorie/id").toString());
-                String nomCat = obj.get("categorie/nomCat").toString();
+                Result result = Result.fromContent(publicationsListJson);
+                int idCat = result.getAsInteger("categorie/id");
+                String nomCat = result.getAsString("categorie/nomCat");
                 CatégoriePublication cp = new CatégoriePublication(idCat, nomCat);
                 publications.add(new Publication(id, contenue, video, localisation,dateTimePub, cp));
             }
@@ -208,7 +210,8 @@ public class PublicationService {
        JSONParser jp = new JSONParser();
         try {
             Map<String, Object> addressesMap = jp.parseJSON(new CharArrayReader(jsonText.toCharArray()));
-            addresse = addressesMap.get("display_name").toString();
+            Result result = Result.fromContent(addressesMap);
+            addresse = result.getAsString("address/state");
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }

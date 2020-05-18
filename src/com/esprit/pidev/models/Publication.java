@@ -31,6 +31,15 @@ public class Publication {
         this.cp = cp;
     }
     
+    
+    //Update Query
+    public Publication(String contenu, String video, String localisation,CatégoriePublication cp) {
+        this.contenu = contenu;
+        this.video = video;
+        this.localisation = localisation;
+        this.cp = cp;
+    }
+    
     //Delete Query
     public Publication(int id_pub) {
         this.id_pub = id_pub;

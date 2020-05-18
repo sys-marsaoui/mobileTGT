@@ -42,7 +42,7 @@ public class PublicationsForm extends BaseForm {
             new AddPublicationForm(this).show();
         });
         btnPublicationsList.addActionListener((evt) -> {
-            //new TasksListForm(this).show();
+            new PublicationsListForm(this).show();
         });
         
         this.addAll(btnAddPublication,btnPublicationsList);
