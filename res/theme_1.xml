@@ -62,6 +62,7 @@
     <image name="left-arrow.png"  />
     <image name="logout.png"  />
     <image name="photo.png"  />
+    <image name="placeholder.png"  />
     <image name="profile_image.png" type="multi"  />
     <image name="progress.png" type="multi"  />
     <image name="selection-in-sidemenu.png" type="multi"  />
@@ -204,8 +205,12 @@
         <val key="ComboBox.sel#bgColor" value="bbbbbb" />
         <border key="ComboBox.sel#border" type="underline"  millimeters="false" thickness="5.0" color="13374835" />
         <val key="ComboBox.sel#fgColor" value="bbbbbb" />
-        <val key="ComboBoxList.bgColor" value="bbbbbb" />
-        <val key="ComboBoxList.fgColor" value="000000" />
+        <val key="ComboBoxList.align" value="4" />
+        <gradient key="ComboBoxList.bgGradient" color1="16777215" color2="16777215" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="ComboBoxList.bgType" value="7" />
+        <val key="ComboBoxPopup.align" value="4" />
+        <gradient key="ComboBoxPopup.bgGradient" color1="16777215" color2="16777215" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="ComboBoxPopup.bgType" value="7" />
         <val key="DarkRect.bgColor" value="262f38" />
         <border key="DarkRect.border" type="round" roundBorderColor="2502456" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="DarkRect.fgColor" value="262f38" />
@@ -298,11 +303,12 @@
         <val key="GroupElementOnly.padding" value="3,3,3,3" />
         <val key="GroupElementOnly.transparency" value="0" />
         <val key="HugeDarkLabel.align" value="4" />
-        <val key="HugeDarkLabel.fgColor" value="627485" />
-        <font key="HugeDarkLabel.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="5.0" />
-        <val key="HugeDarkLabel.margin" value="0,0,0,0" />
+        <val key="HugeDarkLabel.bgColor" value="ffffff" />
+        <val key="HugeDarkLabel.fgColor" value="5722a9" />
+        <font key="HugeDarkLabel.font" type="ttf" face="0" style="1" size="16" name="Handlee-Regular.ttf" family="Handlee-Regular" sizeSettings="3" actualSize="5.0" />
+        <val key="HugeDarkLabel.margin" value="0.0,0.0,0.0,0.0" />
         <val key="HugeDarkLabel.padUnit" value="2,2,2,2" />
-        <val key="HugeDarkLabel.padding" value="1,1,0,1" />
+        <val key="HugeDarkLabel.padding" value="1.0,1.0,0.0,1.0" />
         <val key="HugeDarkLabel.transparency" value="0" />
         <val key="HugeWhileLabel.align" value="4" />
         <val key="HugeWhileLabel.fgColor" value="ffffff" />
@@ -450,6 +456,8 @@
         <font key="SigninTitle.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.5" />
         <val key="SigninTitle.transparency" value="0" />
         <val key="Slider.bgColor" value="f0f0f0" />
+        <gradient key="Slider.bgGradient" color1="13421772" color2="13421772" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="Slider.bgType" value="7" />
         <border key="Slider.border" type="empty" />
         <val key="Slider.fgColor" value="000000" />
         <val key="Slider.sel#bgColor" value="262f38" />
@@ -550,12 +558,16 @@
         <border key="TextField.border" type="underline"  millimeters="false" thickness="5.0" color="0" />
         <border key="TextField.press#border" type="underline"  millimeters="false" thickness="1.0" color="0" />
         <border key="TextField.sel#border" type="underline"  millimeters="false" thickness="5.0" color="13374835" />
-        <val key="TinyBoldLabel.fgColor" value="3c4f5e" />
-        <font key="TinyBoldLabel.font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="1.5" />
-        <val key="TinyBoldLabel.margin" value="0,0,0,0" />
+        <val key="TinyBoldLabel.align" value="4" />
+        <val key="TinyBoldLabel.bgColor" value="0" />
+        <gradient key="TinyBoldLabel.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
+        <val key="TinyBoldLabel.bgType" value="7" />
+        <val key="TinyBoldLabel.fgColor" value="ffffff" />
+        <font key="TinyBoldLabel.font" type="ttf" face="0" style="1" size="0" name="Handlee-Regular.ttf" family="Handlee-Regular" sizeSettings="3" actualSize="3.5" />
+        <val key="TinyBoldLabel.margin" value="0.0,0.0,0.0,0.0" />
         <val key="TinyBoldLabel.padUnit" value="2,2,2,2" />
-        <val key="TinyBoldLabel.padding" value="1,1,1,1" />
-        <val key="TinyBoldLabel.transparency" value="0" />
+        <val key="TinyBoldLabel.padding" value="1.0,1.0,1.0,1.0" />
+        <val key="TinyBoldLabel.transparency" value="60" />
         <val key="TinyThinLabel.fgColor" value="3c4f5e" />
         <font key="TinyThinLabel.font" type="ttf" face="0" style="0" size="0" name="native:MainThin" family="native:MainThin" sizeSettings="3" actualSize="1.5" />
         <val key="TinyThinLabel.margin" value="0,0,0,0" />
@@ -580,4 +592,5 @@
         <border key="Toolbar.border" type="empty" />
         <val key="transparency" value="0" />
     </theme>
+    <image name="video.jpg"  />
 </resource>

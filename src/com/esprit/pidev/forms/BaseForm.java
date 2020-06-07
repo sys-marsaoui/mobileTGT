@@ -64,11 +64,11 @@ public class BaseForm extends Form {
         publicationsButton.addActionListener(e -> new PublicationsForm().show());
         getToolbar().addComponentToSideMenu(publication);
         
-        getToolbar().addCommandToSideMenu("Organisations", organisationImage, e -> {new OrganisationsForm().show();});
-        getToolbar().addCommandToSideMenu("Evenements", eventsImage, e ->{new EvenementsForm().show();});
-        getToolbar().addCommandToSideMenu("Casting", castingImage, e -> {new CastingForm().show();});
-        getToolbar().addCommandToSideMenu("Formations", formationImage, e -> {new FormationsForm().show();});
-        getToolbar().addCommandToSideMenu("Articles", articlesImage, e -> {new ArticlesForm().show();});
+        getToolbar().addCommandToSideMenu("Organisations", organisationImage, e -> {});
+        getToolbar().addCommandToSideMenu("Evenements", eventsImage, e ->{});
+        getToolbar().addCommandToSideMenu("Casting", castingImage, e -> {});
+        getToolbar().addCommandToSideMenu("Formations", formationImage, e -> {});
+        getToolbar().addCommandToSideMenu("Articles", articlesImage, e -> {});
         
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));

@@ -19,25 +19,26 @@ public class Publication {
     private String localisation;
     private Date datePub;
     private double ratingPub;
-    private CatégoriePublication cp;
+    private int id_cat;
  
-    //Update Query
-    public Publication(int id_pub,String contenu, String video, String localisation,Date datePub,CatégoriePublication cp) {
+    //Show Query
+    public Publication(int id_pub,String contenu, String video, String localisation,Date datePub,double ratingPub,int id_cat) {
         this.id_pub = id_pub;
         this.contenu = contenu;
         this.video = video;
         this.localisation = localisation;
+        this.ratingPub = ratingPub;
         this.datePub = datePub;
-        this.cp = cp;
+        this.id_cat = id_cat;
     }
     
     
     //Update Query
-    public Publication(String contenu, String video, String localisation,CatégoriePublication cp) {
+    public Publication(String contenu, String video, String localisation,int id_cat) {
         this.contenu = contenu;
         this.video = video;
         this.localisation = localisation;
-        this.cp = cp;
+        this.id_cat = id_cat;
     }
     
     //Delete Query
@@ -89,12 +90,11 @@ public class Publication {
     public void setRatingPub(double ratingPub) {
         this.ratingPub = ratingPub;
     }
-    
-    public CatégoriePublication getCp() {
-        return cp;
+
+    public int getId_cat() {
+        return id_cat;
     }
-    
-    
+       
     @Override
     public String toString() {
         return "Publication{" + "id_pub=" + id_pub + ", contenu=" + contenu + ", video=" + video + ", localisation=" + localisation + ", datePub=" + datePub + ", ratingPub=" + ratingPub + '}';

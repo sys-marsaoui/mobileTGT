@@ -5,24 +5,24 @@
  */
 package com.esprit.pidev.forms;
 
-import com.codename1.l10n.L10NManager;
-import com.codename1.ui.Button;
-import com.codename1.ui.Component;
+import com.codename1.components.ScaleImageButton;
+import com.codename1.components.ToastBar;
 import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.plaf.Style;
+import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.util.Resources;
 import com.esprit.pidev.models.Publication;
 import com.esprit.pidev.services.PublicationService;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -38,72 +38,41 @@ public class PublicationsListForm extends Form {
         super("Mes Publications", BoxLayout.y());
 
         //Add Commands to toolbar
-        getToolbar().addCommandToRightBar("", r.getImage("logout.png"), e -> {/*Login Form*/
+        getToolbar().addCommandToRightBar("", r.getImage("logout.png"), e -> {
+            ToastBar.showMessage("Déconnexion en cours", FontImage.MATERIAL_EXIT_TO_APP);
         });
         getToolbar().addCommandToLeftBar("", r.getImage("left-arrow.png"), e -> {
-            previous.showBack();
+            new PublicationsForm().showBack();
         });
 
+        Image nativeThemeImage = r.getImage("video.jpg");
+        EncodedImage blurredPlaceholder;
+        if (Display.getInstance().isGaussianBlurSupported()) {
+            blurredPlaceholder = EncodedImage.createFromImage(Display.getInstance().gaussianBlurImage(nativeThemeImage, 20), true);
+        } else {
+            blurredPlaceholder = EncodedImage.createFromImage(nativeThemeImage.modifyAlpha((byte) 80), true);
+        }
         //Parcourir les publications
         for (Publication publication : ps.getAllPublications()) {
-            Container pDetaille = new Container(BoxLayout.y());
-            Container pGlobal = new Container(BoxLayout.x());
+            String contenu = publication.getContenu();
+            ScaleImageButton theme = new ScaleImageButton();
+            theme.setIcon(blurredPlaceholder);
 
-            Label contenuLabel = new Label(publication.getContenu());
-            Label datePubLabel = new Label(publication.getDatePub().toString());
-
-            //Bouton Supprimer
-            Button btnSupprimer = new Button("");
-            btnSupprimer.setUIID("Supprimer");
-            Image deletePub = FontImage.createMaterial(FontImage.MATERIAL_DELETE, "" , 4);
-            btnSupprimer.setIcon(deletePub);
-            //Bouton Modifier
-            Button btnModifier = new Button("");
-            btnSupprimer.setUIID("Modifier");
-            Image editPub = FontImage.createMaterial(FontImage.MATERIAL_EDIT, "", 4);
-            btnModifier.setIcon(editPub);
-            //Bouton Commentaires
-            Button btnComments = new Button("");
-            btnComments.setUIID("Commentaires");
-            Image commentsPub = FontImage.createMaterial(FontImage.MATERIAL_COMMENT, "", 4);
-            btnComments.setIcon(commentsPub);
-            //Bouton Ajout Commentaires
-            Button btnAddComments = new Button("");
-            btnAddComments.setUIID("Ajouter Commentaire");
-            Image addCommentsPub = FontImage.createMaterial(FontImage.MATERIAL_ADD_COMMENT, "", 4);
-            btnAddComments.setIcon(addCommentsPub);
-
-            btnSupprimer.addActionListener(new ActionListener() {
+            theme.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    if (Dialog.show("Suppression Publication", "Voulez-vous vraiment supprimer cette publication ?", "Supprimer", "Annuler")) {
-                        ps.supprimer(publication.getId_pub());
-                    }
-                }
-            });
-            
-            btnModifier.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-                    new EditPublicationForm(previous).show();
+                    new DetailsPublication(publication).show();
                 }
             });
 
-            Container cb = new Container(BoxLayout.x());
-
-            cb.addAll(btnModifier, btnSupprimer, btnComments , btnAddComments);
-
-            pDetaille.addAll(contenuLabel, datePubLabel, cb);
-
-            pGlobal.addAll(pDetaille);
-            
+            Container cnt = LayeredLayout.encloseIn(theme,
+                    BorderLayout.south(new Label(contenu, "TinyBoldLabel")));
+            cnt.setLeadComponent(theme);
+            this.add(cnt);
             this.getContentPane().addPullToRefresh(() -> {
-                System.out.println("Pulled at " + L10NManager.getInstance().formatDateTimeShort(new Date()));
-                new PublicationsListForm(previous).show();
+                new PublicationsListForm(previous).showBack();
             });
-
-            this.add(pGlobal);
-
         }
+        this.setScrollableY(true);
     }
 }

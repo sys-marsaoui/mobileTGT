@@ -5,11 +5,9 @@
  */
 package com.esprit.pidev.forms;
 
+import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
-import com.codename1.ui.Container;
-import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.util.Resources;
 
@@ -21,18 +19,20 @@ public class PublicationsForm extends BaseForm {
 
     public PublicationsForm() {
         this(Resources.getGlobalResources());
-        
+
     }
 
     @Override
     protected boolean isCurrentPublications() {
         return true;
     }
-    
-    public PublicationsForm(com.codename1.ui.util.Resources resourceObjectInstance){
-         installSidemenu(resourceObjectInstance);
-        
-        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout.png"), e -> {/*Login Form*/});
+
+    public PublicationsForm(com.codename1.ui.util.Resources resourceObjectInstance) {
+        installSidemenu(resourceObjectInstance);
+
+        getToolbar().addCommandToRightBar("", resourceObjectInstance.getImage("logout.png"), e -> {
+            ToastBar.showMessage("Déconnexion en cours", FontImage.MATERIAL_EXIT_TO_APP);
+        });
         //Choose your layout set in super methode
         this.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         //Type your code here    
@@ -44,7 +44,7 @@ public class PublicationsForm extends BaseForm {
         btnPublicationsList.addActionListener((evt) -> {
             new PublicationsListForm(this).show();
         });
-        
-        this.addAll(btnAddPublication,btnPublicationsList);
+
+        this.addAll(btnAddPublication, btnPublicationsList);
     }
 }
