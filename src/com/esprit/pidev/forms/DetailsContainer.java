@@ -6,6 +6,7 @@
 package com.esprit.pidev.forms;
 
 import com.codename1.components.MediaPlayer;
+import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.media.Media;
 import com.codename1.media.MediaManager;
@@ -42,11 +43,11 @@ public class DetailsContainer extends Container {
         }
         Container c = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         Container c1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
-        Label contenu = new Label(publication.getContenu(), "HugeDarkLabel");
+        SpanLabel contenu = new SpanLabel(publication.getContenu(), "HugeDarkLabel");
         String datePub = publication.getDatePub().toString();
         int index = datePub.lastIndexOf(" ");
         Label date = new Label(datePub.substring(0, 10) + datePub.substring(index), FontImage.createMaterial(FontImage.MATERIAL_TODAY, s));
-        Label time = new Label(datePub.substring(12, 16), FontImage.createMaterial(FontImage.MATERIAL_SCHEDULE, s));
+        Label time = new Label(datePub.substring(11, 16), FontImage.createMaterial(FontImage.MATERIAL_SCHEDULE, s));
         c1.addAll(date,time);
         Label localisation = new Label(publication.getLocalisation(), FontImage.createMaterial(FontImage.MATERIAL_ROOM, s));
         Label ratingLabel = new Label("Rating : "+publication.getRatingPub(), FontImage.createMaterial(FontImage.MATERIAL_STAR, s));

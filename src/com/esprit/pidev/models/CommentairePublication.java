@@ -29,6 +29,13 @@ public class CommentairePublication {
         this.dateComm = dateComm;
     }
     
+    //Insert Query
+    public CommentairePublication(String contenu, int ratingComm) {
+        this.contenu = contenu;
+        this.ratingComm = ratingComm;
+        //this.dateComm = 
+    }
+    
     
     //Delete Query
     public CommentairePublication(int id_comment) {
@@ -74,6 +81,12 @@ public class CommentairePublication {
     public Publication getP() {
         return p;
     }
+
+    public void setP(Publication p) {
+        this.p = p;
+    }
+    
+    
 
     @Override
     public String toString() {

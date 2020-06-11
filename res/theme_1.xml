@@ -3,9 +3,6 @@
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
     <image name="bg-9.jpg"  />
     <image name="circle.png"  />
-    <image name="contact-a.png" type="multi"  />
-    <image name="contact-b.png" type="multi"  />
-    <image name="contact-c.png" type="multi"  />
     <image name="controls.png"  />
     <image name="GroupElement.borderBottom_1.png" type="multi"  />
     <image name="GroupElement.borderBottomL_1.png" type="multi"  />
@@ -52,8 +49,8 @@
             <entry key="Calendar.Thursday" value="Thu" />
             <entry key="ok" value="OK" />
             <entry key="Calendar.Saturday" value="Sat" />
-            <entry key="select" value="Select" />
             <entry key="Calendar.Friday" value="Fri" />
+            <entry key="select" value="Select" />
             <entry key="edit" value="Edit" />
             <entry key="Calendar.Monday" value="Mon" />
             <entry key="cancel" value="Cancel" />
@@ -364,11 +361,11 @@
         <val key="Padding2.padUnit" value="2,2,2,2" />
         <val key="Padding2.padding" value="2,2,2,2" />
         <val key="Padding2.transparency" value="0" />
-        <val key="RedLabel.fgColor" value="e77c6e" />
-        <font key="RedLabel.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.0" />
-        <val key="RedLabel.margin" value="0,0,0,0" />
+        <val key="RedLabel.fgColor" value="0" />
+        <font key="RedLabel.font" type="ttf" face="0" style="1" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="3" actualSize="3.0" />
+        <val key="RedLabel.margin" value="0.0,0.0,0.0,0.0" />
         <val key="RedLabel.padUnit" value="0,2,0,2" />
-        <val key="RedLabel.padding" value="0,0,1,1" />
+        <val key="RedLabel.padding" value="0.0,0.0,1.0,1.0" />
         <val key="RedLabel.press#fgColor" value="e77c6e" />
         <font key="RedLabel.press#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.0" />
         <val key="RedLabel.press#margin" value="0,0,0,0" />

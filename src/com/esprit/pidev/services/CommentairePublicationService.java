@@ -12,6 +12,7 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.l10n.ParseException;
 import com.codename1.l10n.SimpleDateFormat;
+import com.codename1.processing.Result;
 import com.codename1.ui.events.ActionListener;
 import com.esprit.pidev.models.CommentairePublication;
 import com.esprit.pidev.models.Publication;
@@ -32,6 +33,9 @@ public class CommentairePublicationService {
 
     private boolean responseResult;
     public ArrayList<CommentairePublication> commentairePublications;
+    public ArrayList<CommentairePublication> trieDate;
+    public ArrayList<CommentairePublication> trieRating;
+    CommentairePublication cp ;
 
     public CommentairePublicationService() {
          request = DataSource.getInstance().getRequest();
@@ -91,7 +95,7 @@ public class CommentairePublicationService {
     }
     
     public ArrayList<CommentairePublication> getAllCommentaires(Publication p) {
-        String url = Statics.BASE_URL + "/publications/" + p.getId_pub() + "/commentaires" ;
+        String url = Statics.BASE_URL + "publications/" + p.getId_pub() + "/commentaires" ;
         request.setUrl(url);
         request.setPost(false);
         request.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -110,9 +114,79 @@ public class CommentairePublicationService {
         return commentairePublications;
     }
     
-    /*public CommentairePublication getCommentaire(){
+    public ArrayList<CommentairePublication> trieParDate(Publication p) {
+        String url = Statics.BASE_URL + "publications/" + p.getId_pub() + "/commentaires/trie/date" ;
+        request.setUrl(url);
+        request.setPost(false);
+        request.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                try {
+                    trieDate = parseCommentairesPublications(new String(request.getResponseData()));
+                    request.removeResponseListener(this);
+                } catch (ParseException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+
+        return trieDate;
+    }
+    
+    public ArrayList<CommentairePublication> trieParRating(Publication p) {
+        String url = Statics.BASE_URL + "publications/" + p.getId_pub() + "/commentaires/trie/rating" ;
+        request.setUrl(url);
+        request.setPost(false);
+        request.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                try {
+                    trieRating = parseCommentairesPublications(new String(request.getResponseData()));
+                    request.removeResponseListener(this);
+                } catch (ParseException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+
+        return trieRating;
+    }
+    
+    public CommentairePublication getCommentaire(int id_comment,int id_pub){
         
-    }*/
+        String url = Statics.BASE_URL + "publications/" + id_pub + "/commentaires" + id_comment;
+        request.setUrl(url);
+        request.setPost(false);
+        request.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                cp = parseComment(new String(request.getResponseData()));
+                request.removeResponseListener(this);
+            }
+        });
+        return cp;
+    }
+    
+    public CommentairePublication parseComment (String jsonText){
+        JSONParser jp = new JSONParser();
+        try {
+            Map<String, Object> commentMap = jp.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            Result result = Result.fromContent(commentMap);
+            int id = result.getAsInteger("id");
+            String contenu = result.getAsString("contenu");
+            int nbinutile = result.getAsInteger("nbinutile");
+            int ratingComm = result.getAsInteger("ratingComm");
+            String dateComm = result.getAsString("dateComm");
+            SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+00:00"); 
+            Date dateTimeComm=dateFormat.parse(dateComm);
+            cp = new CommentairePublication(id, contenu, nbinutile, ratingComm, dateTimeComm);
+        } catch (IOException | ParseException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return cp;
+    }
     
         public ArrayList<CommentairePublication> parseCommentairesPublications(String jsonText) throws ParseException {
         try {

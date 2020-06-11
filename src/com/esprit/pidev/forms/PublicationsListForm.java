@@ -69,9 +69,9 @@ public class PublicationsListForm extends Form {
                     BorderLayout.south(new Label(contenu, "TinyBoldLabel")));
             cnt.setLeadComponent(theme);
             this.add(cnt);
-            this.getContentPane().addPullToRefresh(() -> {
-                new PublicationsListForm(previous).showBack();
-            });
+//            this.getContentPane().addPullToRefresh(() -> {
+//                new PublicationsListForm(previous).showBack();
+//            });
         }
         this.setScrollableY(true);
     }

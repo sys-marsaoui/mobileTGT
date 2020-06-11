@@ -10,6 +10,8 @@ import com.codename1.components.ToastBar;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Storage;
 import com.codename1.io.Util;
+import com.codename1.location.Location;
+import com.codename1.location.LocationManager;
 import com.codename1.ui.AutoCompleteTextField;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.openGallery;
@@ -17,6 +19,7 @@ import com.codename1.ui.CN1Constants;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
@@ -32,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -60,9 +64,33 @@ public class ModifierContainer extends Container {
         //Localisation
         Label lbLocalisation = new Label("Je suis là", r.getImage("placeholder.png").scaled(120, 120));
         AutoCompleteTextField localisation = new AutoCompleteTextField(locations);
-        localisation.setHint(publication.getLocalisation());
+        localisation.setText(publication.getLocalisation());
         Button btnModifier = new Button("MODIFIER");
         btnModifier.setPreferredSize(new Dimension(90, 130));
+        btnModifier.addActionListener((evt) -> {
+            if (localisation.getText().length() == 0) {
+                Location position;
+                String local = null;
+                if (LocationManager.getLocationManager().isGPSEnabled()) {
+                    position = LocationManager.getLocationManager().getCurrentLocationSync();
+                    String latitude = Double.toString(position.getLatitude());
+                    String longitude = Double.toString(position.getLongitude());
+                    local = ps.getAddresse(latitude, longitude);
+                    System.out.println(local);
+                } else {
+                    ToastBar.showErrorMessage("Votre localisation est introuvable, veuillez verifier que votre GPS est activé");
+                }
+                localisation.setText(local);
+                ToastBar.showMessage("Votre position " + local + " a été pris comme localisation !",FontImage.MATERIAL_ROOM);
+            } else if (Arrays.asList(locations).contains(localisation.getText())) {
+                System.out.println(localisation.getText());
+                ToastBar.showMessage("Votre nouvelle position est "+localisation.getText(),FontImage.MATERIAL_ROOM);
+            } else {
+                System.out.println(localisation.getText());
+                ToastBar.showErrorMessage("Votre Choix est Invalide");
+                localisation.setText(publication.getLocalisation());
+            }
+        });
         
 
         //Catégories
@@ -150,6 +178,18 @@ public class ModifierContainer extends Container {
 
         //Bouton Publier
         Button btnPublier = new Button("PUBLIER");
+        btnPublier.addActionListener((evt) -> {
+            if (cbcatégories.getSelectedItem() == "null"){
+                ToastBar.showErrorMessage("Veuillez choisir une catégorie valide");
+            } else {
+            int indexCat = catégoriesMap1.get(cbcatégories.getSelectedItem().toString());
+            Publication nouvellePub = new Publication(publication.getId_pub(), taContenu.getText(), vidroute.getText(), localisation.getText(),publication.getDatePub()
+                    , publication.getRatingPub(), indexCat);
+            ps.modifier(nouvellePub);
+            ToastBar.showMessage("Publication Modifiée avec Succés", FontImage.MATERIAL_DONE);
+            new DetailsPublication(nouvellePub).showBack();
+            }
+        });
         
         this.addAll(lbContenu, taContenu, lbLocalisation, localisation, btnModifier, lbCatégorie, cbcatégories, lbVideo, vid, btnPublier);
     }

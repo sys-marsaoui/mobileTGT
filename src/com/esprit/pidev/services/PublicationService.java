@@ -37,6 +37,7 @@ public class PublicationService {
     public ArrayList<Publication> publications;
     public ArrayList<CategoriePublication> catégories;
     public String addresse;
+    Publication publication;
 
     public PublicationService() {
         request = DataSource.getInstance().getRequest();
@@ -64,7 +65,7 @@ public class PublicationService {
         String url = Statics.BASE_URL + "publications/" + p.getId_pub() + "/edit?contenu="
                 + p.getContenu() + "&video=" + p.getVideo() + "&localisation=" + p.getLocalisation()
                 + "&id_cat=" + p.getId_cat();
-
+        
         request.setUrl(url);
         request.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -114,6 +115,42 @@ public class PublicationService {
         return publications;
     }
     
+    public Publication getPublication(int id_pub){
+        String url = Statics.BASE_URL + "publications/" + id_pub;
+        request.setUrl(url);
+        request.setPost(false);
+        request.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                publication = parsePublication(new String(request.getResponseData()));
+                request.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(request);
+        return publication;
+    }
+    
+    public Publication parsePublication (String jsonText){
+        JSONParser jp = new JSONParser();
+        try {
+            Map<String, Object> publicationMap = jp.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            Result result = Result.fromContent(publicationMap);
+            int id = result.getAsInteger("id");
+            String contenu = result.getAsString("contenue");
+            double ratingPub = result.getAsDouble("ratingPub");
+            String datePub = result.getAsString("datePub");
+            SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+00:00"); 
+            Date dateTimePub=dateFormat.parse(datePub);
+            String video = result.getAsString("video");
+            String localisation = result.getAsString("localisation");
+            int idCat = result.getAsInteger("categorie/id");
+            publication = new Publication(id, contenu, video, localisation, dateTimePub, ratingPub, idCat);
+        } catch (IOException | ParseException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return publication;
+    }
+    
     public ArrayList<CategoriePublication> getAllCatégories(){
          String url = Statics.BASE_URL + "categorie";
          request.setUrl(url);
@@ -151,8 +188,9 @@ public class PublicationService {
                 double ratingPub = Double.parseDouble(obj.get("ratingPub").toString());
                 SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+00:00"); 
                 Date dateTimePub=dateFormat.parse(datePub);
-                Result result = Result.fromContent(publicationsListJson);
+                Result result = Result.fromContent(obj);
                 int idCat = result.getAsInteger("categorie/id");
+                //System.out.println(idCat);
                 publications.add(new Publication(id, contenue, video, localisation,dateTimePub,ratingPub,idCat));
             }
 

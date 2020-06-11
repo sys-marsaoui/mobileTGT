@@ -47,6 +47,7 @@ public class AddPublicationForm extends Form {
     Resources r = Resources.getGlobalResources();
     PublicationService ps = new PublicationService();
     HashMap<String, Integer> catégoriesMap = new HashMap();
+    Label vidroute = new Label("Aucun fichier choisi");
 
     public AddPublicationForm(Form previous) {
         super("Publication Video", BoxLayout.y());
@@ -58,10 +59,10 @@ public class AddPublicationForm extends Form {
         getToolbar().addCommandToLeftBar("", r.getImage("left-arrow.png"), e -> {
             previous.showBack();
         });
-
+        
         //Exprimez-vous
         Label lbContenu = new Label("Exprimez-vous");
-        TextArea taContenu = new TextArea(10, 30);
+        TextArea taContenu = new TextArea(10, 30, TextArea.ANY);
 
         //Catégories
         ComboBox cbcatégories = new ComboBox(catégories);
@@ -78,7 +79,6 @@ public class AddPublicationForm extends Form {
         btnVideo.setUIID("VideoPublication");
         Image defaultAvatar = r.getImage("circle.png");
         btnVideo.setIcon(defaultAvatar);
-        Label vidroute = new Label("Aucun fichier choisi");
 
         btnVideo.addActionListener(new ActionListener() {
             @Override
@@ -143,35 +143,39 @@ public class AddPublicationForm extends Form {
             }
         });
         vid.addAll(btnVideo, vidroute);
+        
 
         //Bouton Publier
         Button btnPublier = new Button("PUBLIER");
         btnPublier.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                //Localisation
-                Location position;
-                String localisation = null;
-                if (LocationManager.getLocationManager().isGPSEnabled()) {
-                    position = LocationManager.getLocationManager().getCurrentLocationSync();
-                    String latitude = Double.toString(position.getLatitude());
-                    String longitude = Double.toString(position.getLongitude());
-                    localisation = ps.getAddresse(latitude, longitude);
-                    System.out.println(localisation);
+                if (vidroute.getText().equals("Aucun fichier choisi")) {
+                    ToastBar.showErrorMessage("Veuillez uploader un vidéo");
                 } else {
-                    ToastBar.showErrorMessage("Votre localisation est introuvable, veuillez verifier que votre GPS est activé");
+                    //Localisation
+                    Location position;
+                    String localisation = null;
+                    if (LocationManager.getLocationManager().isGPSEnabled()) {
+                        position = LocationManager.getLocationManager().getCurrentLocationSync();
+                        String latitude = Double.toString(position.getLatitude());
+                        String longitude = Double.toString(position.getLongitude());
+                        localisation = ps.getAddresse(latitude, longitude);
+                        System.out.println(localisation);
+                    } else {
+                        ToastBar.showErrorMessage("Votre localisation est introuvable, veuillez verifier que votre GPS est activé");
+                    }
+                    int indexCat = catégoriesMap.get(cbcatégories.getSelectedItem().toString());
+                    boolean ajout = ps.ajouter(new Publication(taContenu.getText(), vidroute.getText(), localisation, indexCat));
+                    if (ajout) {
+                        taContenu.setText("");
+                        vidroute.setText("Aucun fichier choisi");
+                        cbcatégories.setSelectedItem(null);
+                        ToastBar.showMessage("Votre Publication a été ajouté avec succès", FontImage.MATERIAL_ADD);
+                    } else {
+                        ToastBar.showErrorMessage("Probléme lors de l'ajout");
+                    }
                 }
-                int indexCat = catégoriesMap.get(cbcatégories.getSelectedItem().toString());
-                boolean ajout = ps.ajouter(new Publication(taContenu.getText(), vidroute.getText(), localisation, indexCat));
-                if (ajout) {
-                   taContenu.setText("");
-                vidroute.setText("Aucun fichier choisi");
-                cbcatégories.setSelectedItem(null);
-                ToastBar.showMessage("Votre Publication a été ajouté avec succès",FontImage.MATERIAL_ADD); 
-                } else {
-                    ToastBar.showErrorMessage("Probléme lors de l'ajout");
-                }
-                
             }
         });
         this.addAll(lbContenu, taContenu, lbCatégorie, cbcatégories, lbVideo, vid, btnPublier);
