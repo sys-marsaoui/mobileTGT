@@ -33,7 +33,13 @@ public class DetailsContainer extends Container {
         super(new BoxLayout(BoxLayout.Y_AXIS));
         Style s = UIManager.getInstance().getComponentStyle("Tab");
         try {
-            Media video = MediaManager.createMedia(publication.getVideo(), true);
+            String path = null;
+            if (publication.getVideo().startsWith("file:/")) {
+                path = publication.getVideo();
+            } else if (!publication.getVideo().startsWith("file")){
+                path = "file:/C:/wamp64/www/TGTWeb/web/uploads/assets/"+publication.getVideo();
+            }
+            Media video = MediaManager.createMedia(path, true);
             MediaPlayer player = new MediaPlayer(video);
             player.showControls();
             player.run();

@@ -97,11 +97,11 @@ public class AddPublicationForm extends Form {
                             int int_random = rand.nextInt(upperbound);
                             FileSystemStorage fs = FileSystemStorage.getInstance();
                             InputStream stream = fs.openInputStream(video);
-                            out = Storage.getInstance().createOutputStream("file://C:/wamp64/www/TGTFinale/web/uploads/assets/publication" + int_random + extension);
+                            out = Storage.getInstance().createOutputStream("file:/C:/wamp64/www/TGTWeb/web/uploads/assets/publication" + int_random + extension);
                             Util.copy(stream, out);
                             Util.cleanup(stream);
                             Util.cleanup(out);
-                            String videoPath = "file://C:/wamp64/www/TGTFinale/web/uploads/assets/publication" + int_random + extension;
+                            String videoPath = "file:/C:/wamp64/www/TGTWeb/web/uploads/assets/publication" + int_random + extension;
                             vidroute.setText(videoPath);
                         } catch (IOException ex) {
                             ToastBar.showErrorMessage("Une erreur s'est produite lors de l'enregistrement de la vidéo:" + ex.getMessage());
@@ -122,11 +122,11 @@ public class AddPublicationForm extends Form {
                                 int int_random = rand.nextInt(upperbound);
                                 FileSystemStorage fs = FileSystemStorage.getInstance();
                                 InputStream stream = fs.openInputStream(video);
-                                out = fs.openOutputStream("file://C:/wamp64/www/TGTFinale/web/uploads/assets/publication" + int_random + extension);
+                                out = fs.openOutputStream("file:/C:/wamp64/www/TGTWeb/web/uploads/assets/publication" + int_random + extension);
                                 Util.copy(stream, out);
                                 Util.cleanup(stream);
                                 Util.cleanup(out);
-                                String videoPath = "file://C:/wamp64/www/TGTFinale/web/uploads/assets/publication" + int_random + extension;
+                                String videoPath = "file:/C:/wamp64/www/TGTWeb/web/uploads/assets/publication" + int_random + extension;
                                 vidroute.setText(videoPath);
                             } catch (IOException ex) {
                                 ToastBar.showErrorMessage("Une erreur s'est produite lors de l'enregistrement de la vidéo:" + ex.getMessage());
